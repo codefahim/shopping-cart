@@ -1,0 +1,3 @@
+script.js is hard to read. 
+script v2 is easy to read and work simply.
+so use 2nd one for your project.
