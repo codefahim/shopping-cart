@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <html>
+
+    <head>
+        <script>
+            function increase() {
+                if (typeof this.counter == 'undefined') {
+                    this.counter = 1;
+                }
+
+                var textBox = document.getElementById("text");
+                textBox.value = this.counter;
+                this.counter++;
+            }
+        </script>
+    </head>
+
+    <body>
+        <button type="button" onclick="increase()">show</button>
+        <input type="text" id="text">
+    </body>
+
+    </html>
+</body>
+
+</html>
+
+
+
+
+<!-- solution 2  -->
