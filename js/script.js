@@ -6,10 +6,6 @@ minus.addEventListener('click', function() {
         document.getElementById('text').value = inputNumber;
         let inputPrice = inputNumber * 1219;
         document.getElementById('iphone').innerHTML = inputPrice;
-
-
-
-
     }
     totalCost();
 })
@@ -24,10 +20,7 @@ plus.addEventListener('click', function() {
     inputPrice = inputNumber * 1219;
     document.getElementById('iphone').innerHTML = inputPrice;
 
-
-
     totalCost();
-
 })
 
 
@@ -39,12 +32,9 @@ minusOne.addEventListener('click', function() {
         inputNumber -= 1;
         document.getElementById('textOne').value = inputNumber;
 
-
         let inputPrice = getInputText('iphoneOne');
         inputPrice = inputNumber * 59;
         document.getElementById('iphoneOne').innerHTML = inputPrice;
-
-
     }
 
     totalCost()
@@ -61,7 +51,6 @@ plusOne.addEventListener('click', function() {
     inputPrice = inputNumber * 59;
     document.getElementById('iphoneOne').innerHTML = inputPrice;
 
-
     totalCost()
 })
 
@@ -75,14 +64,7 @@ function totalCost() {
 
     let subTotalPrice = phonePrice + coverPrice;
 
-    document.getElementById('subTotal').innerHTML = subTotalPrice;
-    let taxAmount = taxCalculation(subTotalPrice);
-    document.getElementById('tax').innerHTML = taxAmount;
-
-
-    let totalCost = getInputText('total');
-    totalCost = subTotalPrice + taxAmount;
-    document.getElementById('total').innerHTML = totalCost;
+    summary(subTotalPrice);
 
 }
 
@@ -121,14 +103,7 @@ removeItem.addEventListener('click', function() {
 
     let subTotalPrice = 0 + coverPrice;
 
-    document.getElementById('subTotal').innerHTML = subTotalPrice;
-    let taxAmount = taxCalculation(subTotalPrice);
-    document.getElementById('tax').innerHTML = taxAmount;
-
-
-    let totalCost = getInputText('total');
-    totalCost = subTotalPrice + taxAmount;
-    document.getElementById('total').innerHTML = totalCost;
+    summary(subTotalPrice);
 })
 
 let removeCover = document.getElementById('removeCover');
@@ -143,15 +118,18 @@ removeCover.addEventListener('click', function() {
     let coverPrice = getInputText('iphoneOne');
     document.getElementById('iphoneOne').innerHTML = 0;
 
-
     let subTotalPrice = phonePrice + 0;
 
-    document.getElementById('subTotal').innerHTML = subTotalPrice;
-    let taxAmount = taxCalculation(subTotalPrice);
+    summary(subTotalPrice);
+})
+
+function summary(price) {
+
+    document.getElementById('subTotal').innerHTML = price;
+    let taxAmount = taxCalculation(price);
     document.getElementById('tax').innerHTML = taxAmount;
 
-
     let totalCost = getInputText('total');
-    totalCost = subTotalPrice + taxAmount;
+    totalCost = price + taxAmount;
     document.getElementById('total').innerHTML = totalCost;
-})
+}
