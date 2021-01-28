@@ -1,135 +1,105 @@
 const minus = document.getElementById('minus');
-minus.addEventListener('click', function() {
-    let inputNumber = getInputNumber('text');
-    if (inputNumber >= 1) {
-        inputNumber -= 1;
-        document.getElementById('text').value = inputNumber;
-        let inputPrice = inputNumber * 1219;
-        document.getElementById('iphone').innerHTML = inputPrice;
-    }
-    totalCost();
-})
-
 const plus = document.getElementById('plus');
-plus.addEventListener('click', function() {
-    let inputNumber = getInputNumber('text');
-    inputNumber += 1;
-    document.getElementById('text').value = inputNumber;
-
-    let inputPrice = getInputText('iphone');
-    inputPrice = inputNumber * 1219;
-    document.getElementById('iphone').innerHTML = inputPrice;
-
-    totalCost();
-})
-
+const iphone = document.getElementById('iphone');
 
 
 const minusOne = document.getElementById('minusOne');
-minusOne.addEventListener('click', function() {
-    let inputNumber = getInputNumber('textOne');
-    if (inputNumber >= 1) {
-        inputNumber -= 1;
-        document.getElementById('textOne').value = inputNumber;
-
-        let inputPrice = getInputText('iphoneOne');
-        inputPrice = inputNumber * 59;
-        document.getElementById('iphoneOne').innerHTML = inputPrice;
-    }
-
-    totalCost()
-})
-
-
 const plusOne = document.getElementById('plusOne');
+const iphoneOne = document.getElementById('iphoneOne');
+
+
+minus.addEventListener('click', function() {
+    handlePhonePrice(false);
+    total();
+})
+plus.addEventListener('click', function() {
+    handlePhonePrice(true);
+    total();
+})
+minusOne.addEventListener('click', function() {
+    handleCoverPrice(false);
+    total();
+})
 plusOne.addEventListener('click', function() {
-    let inputNumber = getInputNumber('textOne');
-    inputNumber += 1;
-    document.getElementById('textOne').value = inputNumber;
-
-    let inputPrice = getInputText('iphoneOne');
-    inputPrice = inputNumber * 59;
-    document.getElementById('iphoneOne').innerHTML = inputPrice;
-
-    totalCost()
+    handleCoverPrice(true);
+    total();
 })
 
-function totalCost() {
+function total() {
     let phonePrice = getInputText('iphone');
-    document.getElementById('iphone').innerHTML = phonePrice;
+    document.getElementById('iphone').innerText = phonePrice;
 
-    let coverPrice = getInputText('iphoneOne');
-    document.getElementById('iphoneOne').innerHTML = coverPrice;
+    let casePrice = getInputText('iphoneOne');
+    document.getElementById('iphoneOne').innerText = casePrice;
+
+    let subTotal = getInputText('subTotal');
+    subTotal = phonePrice + casePrice;
+    document.getElementById('subTotal').innerText = subTotal;
 
 
-    let subTotalPrice = phonePrice + coverPrice;
+    let texInput = taxCalculation(subTotal);
+    document.getElementById('tax').innerText = texInput;
+    let totalCost = texInput + subTotal;
+    document.getElementById('total').innerText = totalCost;
+    console.log(texInput);
 
-    summary(subTotalPrice);
-
-}
-
-function taxCalculation(price) {
-    let taxValue = 0;
-    if (price > 1500) {
-        taxValue = Math.ceil(price * .05);
-    }
-    return taxValue;
 }
 
 
 function getInputNumber(id) {
-    const text = document.getElementById(id).value;
-    let inputNumber = parseInt(text);
+    const textInput = document.getElementById(id).value;
+    let inputNumber = parseFloat(textInput);
     return inputNumber;
 }
 
 function getInputText(id) {
-    const text = document.getElementById(id).innerText;
-    let inputNumber = parseInt(text);
+    const textInput = document.getElementById(id).innerText;
+    let inputNumber = parseFloat(textInput);
     return inputNumber;
 }
-let removeItem = document.getElementById('removePhone');
-removeItem.addEventListener('click', function() {
-    const phoneItem = document.getElementById('phoneItem');
-    phoneItem.style.display = 'none';
+
+function taxCalculation(price) {
+    let taxAmount = 0;
+    if (price > 1500) {
+        taxAmount = Math.ceil(price * 0.05);
+    }
+    return taxAmount;
+}
+
+function handlePhonePrice(isIncrease) {
+    let inputNumber = getInputNumber('text');
+    if (isIncrease == true) {
+        inputNumber++;
+    }
+    if (isIncrease == false) {
+        if (inputNumber >= 1) {
+            inputNumber--;
+        }
+
+    }
+    document.getElementById('text').value = inputNumber;
 
 
     let phonePrice = getInputText('iphone');
-    document.getElementById('iphone').innerHTML = 0;
+    phonePrice = inputNumber * 1219;
+    document.getElementById('iphone').innerText = phonePrice;
+}
 
-    let coverPrice = getInputText('iphoneOne');
-    document.getElementById('iphoneOne').innerHTML = coverPrice;
+function handleCoverPrice(isIncrease) {
+    let inputNumber = getInputNumber('textOne');
+    if (isIncrease == true) {
+        inputNumber++;
+    }
+    if (isIncrease == false) {
+        if (inputNumber >= 1) {
+            inputNumber--;
+        }
+
+    }
+    document.getElementById('textOne').value = inputNumber;
 
 
-    let subTotalPrice = 0 + coverPrice;
-
-    summary(subTotalPrice);
-})
-
-let removeCover = document.getElementById('removeCover');
-removeCover.addEventListener('click', function() {
-    const phoneItem = document.getElementById('coverItem');
-    phoneItem.style.display = 'none';
-
-
-    let phonePrice = getInputText('iphone');
-    document.getElementById('iphone').innerHTML = phonePrice;
-
-    let coverPrice = getInputText('iphoneOne');
-    document.getElementById('iphoneOne').innerHTML = 0;
-
-    let subTotalPrice = phonePrice + 0;
-
-    summary(subTotalPrice);
-})
-
-function summary(price) {
-
-    document.getElementById('subTotal').innerHTML = price;
-    let taxAmount = taxCalculation(price);
-    document.getElementById('tax').innerHTML = taxAmount;
-
-    let totalCost = getInputText('total');
-    totalCost = price + taxAmount;
-    document.getElementById('total').innerHTML = totalCost;
+    let phonePrice = getInputText('iphoneOne');
+    phonePrice = inputNumber * 59;
+    document.getElementById('iphoneOne').innerText = phonePrice;
 }
