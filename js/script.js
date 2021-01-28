@@ -79,13 +79,13 @@ function taxCalculation(price) {
 
 function getInputNumber(id) {
     const text = document.getElementById(id).value;
-    let inputNumber = parseFloat(text);
+    let inputNumber = parseInt(text);
     return inputNumber;
 }
 
 function getInputText(id) {
     const text = document.getElementById(id).innerText;
-    let inputNumber = parseFloat(text);
+    let inputNumber = parseInt(text);
     return inputNumber;
 }
 let removeItem = document.getElementById('removePhone');
